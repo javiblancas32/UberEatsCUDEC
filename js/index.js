@@ -20,7 +20,7 @@ btnAgregarPlatillo.addEventListener('click', function() {
 function mostrarPlatillos(platillo, id) {
   contenido += `
     <div class="card-panel recipe white row"
-      data-id="${id}">
+      id="${id}">
       <div class="recipe-details">
         <div class="recipe-title">
           ${platillo.nombre}
@@ -30,7 +30,7 @@ function mostrarPlatillos(platillo, id) {
           ${platillo.ingredientes}
         </div>
 
-        <div class="recipe-title">
+        <div class="recipe-price">
           Precio: $${platillo.precio}
         </div>
       </div>
@@ -41,4 +41,11 @@ function mostrarPlatillos(platillo, id) {
   `;
 
   document.querySelector('.recipes').innerHTML = contenido;
+}
+
+function actualizarPlatillos(platillo, id) {
+let tarjeta = document.getElementById(`${id}`);
+tarjeta.querySelector(".recipe-title").innerHTML = platillo.nombre;
+tarjeta.querySelector(".recipe-ingredients").innerHTML = platillo.ingredientes;
+tarjeta.querySelector(".recipe-price").innerHTML = `Precio: $${platillo.precio}`;
 }
