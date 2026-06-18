@@ -3,6 +3,7 @@ db.collection("platillos").onSnapshot((datos) => {
         if (registro.type === "added") {  
         mostrarPlatillos(registro.doc.data(), registro.doc.id);       
         }
+        actualizarAlista();
         if (registro.type === "modified") {  
         actualizarPlatillo(registro.doc.data(), registro.doc.id);
         }

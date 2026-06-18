@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pedido de Platillos</title>
+
+  
+  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+</head>
+
+<body class="grey lighten-4">
+
+  
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="/">La parada de javi</a>
+      <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+      </span>
+    </div>
+  </nav>
+
+  
+  <ul id="side-menu" class="sidenav side-menu">
+    <li><a class="subheader">LA PARADA DE JAVI</a></li>
+    <li><a href="/" class="waves-effect">Home</a></li>
+    <li><a href="/pages/about.html" class="waves-effect">About</a></li>
+    <li><div class="divider"></div></li>
+    <li>
+      <a href="/pages/contact.html" class="waves-effect">
+        <i class="material-icons">mail_outline</i>
+        Contact
+      </a>
+    </li>
+  </ul>
+
+  
+  <div class="container" style="margin-top:40px;">
+
+    <div class="card-panel">
+
+      <h5 class="center">Pedido de Platillo</h5>
+
+      
+      <div class="input-field">
+        <select id="platillo">
+          <option value="" disabled selected>Seleccione un platillo</option>
+          <option value="Sopa maruchan">Sopa maruchan</option>
+          <option value="Pizza">Pizza</option>
+          <option value="Tacos">Tacos</option>
+          <option value="Alitas">Alitas</option>
+        </select>
+        <label>Platillo</label>
+      </div>
+
+      
+      <div class="input-field">
+        <input id="direccion" type="text">
+        <label for="direccion">Dirección</label>
+      </div>
+
+    
+      <div class="center">
+        <button id="cancelar" class="btn red">
+          Cancelar
+        </button>
+
+        <button id="guardar" class="btn green">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      
+      const sidenavs = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(sidenavs);
+
+
+      const selects = document.querySelectorAll('select');
+      M.FormSelect.init(selects);
+
+      
+      document.getElementById('cancelar').addEventListener('click', function() {
+        document.getElementById('direccion').value = '';
+        document.getElementById('platillo').selectedIndex = 0;
+
+        M.FormSelect.init(document.querySelectorAll('select'));
+        M.updateTextFields();
+      });
+
+      
+      document.getElementById('guardar').addEventListener('click', function() {
+
+        const platillo = document.getElementById('platillo').value;
+        const direccion = document.getElementById('direccion').value;
+
+        if (!platillo || direccion.trim() === '') {
+          M.toast({
+            html: 'Complete todos los campos'
+          });
+          return;
+        }
+
+        alert(
+          'Platillo: ' + platillo +
+          '\nDirección: ' + direccion
+        );
+      });
+
+    });
+  </script>
+  <script src="/js/db.js"></script>
+  <script src="/js/pedidos.js"></script>
+</body>
+</html>
