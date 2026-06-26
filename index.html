@@ -1,106 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>UberEatsCUDEC</title>
+  <title>Food Ninja</title>
 
-  <!-- Materialize CSS -->
-  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" href="/css/styles.css" rel="stylesheet">
-
-  <!-- Materialize JS -->
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body class="grey lighten-4">
 
-  <!-- Menú superior -->
-  <nav class="z-depth-0">
-    <div class="nav-wrapper container">
-      <a href="/">ubereatscudec</a>
-      <span class="right grey-text text-darken-1">
-        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
-      </span>
-    </div>
-  </nav>
-
-  <!-- Menú lateral -->
-  <ul id="side-menu" class="sidenav side-menu">
-    <li><a class="subheader">Casa Javi</a></li>
-    <li><a href="/" class="waves-effect">Inicio</a></li>
-    <li><a href="/pages/about.html" class="waves-effect">Acerca</a></li>
-    <li><div class="divider"></div></li>
-    <li>
-      <a href="/pages/contact.html" class="waves-effect">
-        <i class="material-icons">mail_outline</i>
-        Contacto
-      </a>
-    </li>
-  </ul>
-
-  <!-- Lista de platillos -->
-  <div class="recipes container grey-text text-darken-1">
-
+<nav class="z-depth-0">
+  <div class="nav-wrapper container">
+    <a href="/">La parada<span>de Javi</span></a>
+    <i class="material-icons sidenav-trigger right" data-target="side-menu">menu</i>
   </div>
+</nav>
 
-  <!-- Botón flotante -->
-  <div class="center">
-    <a class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form">
-      <i class="material-icons">add</i>
-    </a>
-  </div>
+<ul id="side-menu" class="sidenav side-menu">
+  <li><a href="/">Home</a></li>
+  <li><a href="/pedidos.html">Pedidos</a></li>
+  <li><a href="/contact.html">Contact</a></li>
+</ul>
 
-  <!-- Formulario -->
-  <div id="side-form" class="sidenav side-form">
-    <form class="add-recipe container section">
-      <h6>Nuevo platillo</h6>
+<div class="container">
 
-      <div class="divider"></div>
+  <form class="side-form">
+    <input name="title" placeholder="Nombre">
+    <input name="ingredients" placeholder="Ingredientes">
+    <input name="price" placeholder="Precio">
+    <button id="btnAgregarPlatillo" class="btn">Agregar</button>
+  </form>
 
-      <div class="input-field">
-        <input placeholder="Ejemplo: Pizza" id="title" type="text" class="validate">
-        <label for="title">Nombre</label>
-      </div>
+  <div class="recipes"></div>
 
-      <div class="input-field">
-        <input placeholder="Ej. Queso, jamón, champiñones" id="ingredients" type="text" class="validate">
-        <label for="ingredients">Ingredientes</label>
-      </div>
-        <div class="input-field">
-        <input placeholder="$100, $200, $300" id="price" type="text" class="validate">
-        <label for="price">Precio</label>
-      </div>
-      <div class="input-field center">
-        <button class="btn-small">Agregar</button>
-      </div>
-    </form>
-  </div>
+</div>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyD9Pw6G9VPQ7PTVpNFDz5dYbUXafzbMPKM",
-      authDomain: "ubereatsjavier-4f133.firebaseapp.com",
-      projectId: "ubereatsjavier-4f133",
-      storageBucket: "ubereatsjavier-4f133.firebasestorage.app",
-      messagingSenderId: "920825664473",
-      appId: "1:920825664473:web:1c032fd93aaf6d75357fc8",
-      measurementId: "G-V4T4QKHS5B"
-    };
+<script src="/js/firebase.js"></script>
+<script src="/js/db.js"></script>
+<script src="/js/index.js"></script>
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
-
-  <!-- Scripts de la aplicación -->
-  <script src="/js/index.js"></script>
-  <script src="/js/db.js"></script>
-
+<script src="/js/materialize.min.js"></script>
 </body>
 </html>

@@ -1,34 +1,54 @@
-db.collection("platillos").onSnapshot((datos) => {
-    datos.docChanges().forEach((registro) => {
-        if (registro.type === "added") {  
-        mostrarPlatillos(registro.doc.data(), registro.doc.id);       
-        }
-        actualizarAlista();
-        if (registro.type === "modified") {  
-        actualizarPlatillo(registro.doc.data(), registro.doc.id);
-        }
-    });
+
+// ==========================
+// LISTENER FIREBASE
+// ==========================
+db.collection("platillos").onSnapshot((snapshot) => {
+
+  snapshot.docChanges().forEach((change) => {
+
+    if (change.type === "added") {
+      if (typeof mostrarPlatillos === "function") {
+        mostrarPlatillos(change.doc.data(), change.doc.id);
+      }
+    }
+
+    if (change.type === "modified") {
+      if (typeof actualizarPlatillo === "function") {
+        actualizarPlatillo(change.doc.data(), change.doc.id);
+      }
+    }
+
+  });
+
 });
 
+
+// ==========================
+// FORMULARIO (SOLO SI EXISTE)
+// ==========================
 const formularioAgregar = document.querySelector("form");
-formularioAgregar.addEventListener("submit", (e) => {
+
+if (formularioAgregar) {
+
+  formularioAgregar.addEventListener("submit", (e) => {
     e.preventDefault();
+
     const platilloNuevo = {
-        nombre: formularioAgregar.title.value,
-        ingredientes: formularioAgregar.ingredients.value,
-        precio: formularioAgregar.price.value
-    
-    }
-        db.collection("platillos").add(platilloNuevo)
-        .catch((error) => {
-            console.log(error);
-            alert("Error al agregar platillo");
-        }
-        );
+      nombre: formularioAgregar.title.value,
+      ingredientes: formularioAgregar.ingredients.value,
+      precio: formularioAgregar.price.value
+    };
 
-        formularioAgregar.title.value = "";
-        formularioAgregar.ingredients.value = "";
-        formularioAgregar.price.value = "";
-        alert("Platillo Agregado");
+    db.collection("platillos").add(platilloNuevo)
+      .then(() => {
+        formularioAgregar.reset();
+        alert("Platillo agregado");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error al agregar");
+      });
 
-}); 
+  });
+
+}
