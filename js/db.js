@@ -1,8 +1,8 @@
+let contenido = "";
 
-// ==========================
-// LISTENER FIREBASE
-// ==========================
 db.collection("platillos").onSnapshot((snapshot) => {
+
+  contenido = "";
 
   snapshot.docChanges().forEach((change) => {
 
@@ -12,20 +12,16 @@ db.collection("platillos").onSnapshot((snapshot) => {
       }
     }
 
-    if (change.type === "modified") {
-      if (typeof actualizarPlatillo === "function") {
-        actualizarPlatillo(change.doc.data(), change.doc.id);
-      }
+    if (change.type === "removed") {
+      const el = document.getElementById(change.doc.id);
+      if (el) el.remove();
     }
 
   });
 
 });
 
-
-// ==========================
-// FORMULARIO (SOLO SI EXISTE)
-// ==========================
+// AGREGAR PLATILLOS
 const formularioAgregar = document.querySelector("form");
 
 if (formularioAgregar) {
@@ -33,21 +29,15 @@ if (formularioAgregar) {
   formularioAgregar.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const platilloNuevo = {
+    const platillo = {
       nombre: formularioAgregar.title.value,
       ingredientes: formularioAgregar.ingredients.value,
       precio: formularioAgregar.price.value
     };
 
-    db.collection("platillos").add(platilloNuevo)
-      .then(() => {
-        formularioAgregar.reset();
-        alert("Platillo agregado");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error al agregar");
-      });
+    db.collection("platillos").add(platillo)
+      .then(() => formularioAgregar.reset())
+      .catch(err => console.log(err));
 
   });
 

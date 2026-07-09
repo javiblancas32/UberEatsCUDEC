@@ -1,5 +1,5 @@
 var firebaseConfig = {
- apiKey: "AIzaSyD9Pw6G9VPQ7PTVpNFDz5dYbUXafzbMPKM",
+  apiKey: "AIzaSyD9Pw6G9VPQ7PTVpNFDz5dYbUXafzbMPKM",
   authDomain: "ubereatsjavier-4f133.firebaseapp.com",
   projectId: "ubereatsjavier-4f133",
   storageBucket: "ubereatsjavier-4f133.firebasestorage.app",

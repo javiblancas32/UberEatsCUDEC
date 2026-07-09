@@ -1,38 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Pedidos</title>
 
+  <!-- Materialize -->
   <link rel="stylesheet" href="/css/materialize.min.css">
+
+  <!-- Iconos Material -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    body {
+      padding-bottom: 50px;
+    }
+
+    .container {
+      margin-top: 40px;
+    }
+
+    #btnUbicacion {
+      margin-top: 20px;
+    }
+  </style>
+
 </head>
+
 
 <body class="grey lighten-4">
 
-<nav>
+
+<nav class="blue">
   <div class="nav-wrapper container">
-    <a href="/">La Parada de Javi</a>
+
+    <a href="/" class="brand-logo">
+      La Parada de Javi
+    </a>
+
+    <a href="/" class="right btn white blue-text">
+      <i class="material-icons left">
+        arrow_back
+      </i>
+      Regresar
+    </a>
+
   </div>
 </nav>
 
+
 <div class="container">
 
-  <div class="input-field">
-    <select id="platillo">
-      <option disabled selected>Seleccione un platillo</option>
-    </select>
-  </div>
+  <h4 class="center">
+    Nuevo Pedido
+  </h4>
+
+
+  <form id="formPedido">
+
+
+    <!-- Nombre -->
+    <div class="input-field">
+
+      <input 
+        type="text" 
+        id="nombre" 
+        required
+      >
+
+      <label for="nombre">
+        Nombre del cliente
+      </label>
+
+    </div>
+
+
+
+    <!-- Dirección -->
+    <div class="input-field">
+
+      <input 
+        type="text" 
+        id="direccion" 
+        required
+      >
+
+      <label for="direccion">
+        Dirección
+      </label>
+
+    </div>
+
+
+
+    <!-- Platillo -->
+    <div class="input-field">
+
+      <select id="platillo" required>
+
+        <option value="" disabled selected>
+          Seleccione un platillo
+        </option>
+
+      </select>
+
+      <label>
+        Platillo
+      </label>
+
+    </div>
+
+
+
+    <!-- Coordenadas ocultas -->
+    <input 
+      type="hidden" 
+      id="latitud"
+    >
+
+    <input 
+      type="hidden" 
+      id="longitud"
+    >
+
+
+
+    <!-- Botón ubicación -->
+    <button 
+      type="button" 
+      id="btnUbicacion" 
+      class="btn blue"
+    >
+
+      <i class="material-icons left">
+        location_on
+      </i>
+
+      Obtener ubicación
+
+    </button>
+
+
+
+    <!-- Guardar -->
+    <button 
+      type="submit" 
+      class="btn green"
+    >
+
+      <i class="material-icons left">
+        save
+      </i>
+
+      Guardar Pedido
+
+    </button>
+
+
+  </form>
+
 
 </div>
 
+
+
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
 
+
+
+<!-- Configuración Firebase -->
 <script src="/js/firebase.js"></script>
+
+
+<!-- Base de datos -->
 <script src="/js/db.js"></script>
+
+
+
+<!-- Código de pedidos -->
 <script src="/js/pedidos.js"></script>
 
+
+
+<!-- Materialize debe ir al final -->
 <script src="/js/materialize.min.js"></script>
+
+
 </body>
+
 </html>

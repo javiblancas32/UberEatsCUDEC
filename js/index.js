@@ -1,49 +1,49 @@
-
-const btnAgregarPlatillo = document.getElementById('btnAgregarPlatillo');
-
-let contenido = '';
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  const menus = document.querySelectorAll('.side-menu');
-  M.Sidenav.init(menus, { edge: 'right' });
-
-  const forms = document.querySelectorAll('.side-form');
-  M.Sidenav.init(forms, { edge: 'left' });
+  const menus = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(menus);
 
 });
 
-// ==========================
-// BOTÓN
-// ==========================
-if (btnAgregarPlatillo) {
-  btnAgregarPlatillo.addEventListener('click', function () {
-    alert('Platillo agregado');
-  });
-}
-
-// ==========================
-// MOSTRAR PLATILLOS (GLOBAL)
-// ==========================
 function mostrarPlatillos(platillo, id) {
-
-  contenido += `
-    <div class="card-panel recipe white row" id="${id}">
-      <div class="recipe-details">
-
-        <div class="recipe-title">${platillo.nombre}</div>
-
-        <div class="recipe-ingredients">${platillo.ingredientes}</div>
-
-        <div class="recipe-price">Precio: $${platillo.precio}</div>
-
-      </div>
-    </div>
-  `;
 
   const contenedor = document.querySelector('.recipes');
 
-  if (contenedor) {
-    contenedor.innerHTML = contenido;
-  }
+  const div = document.createElement('div');
+  div.classList.add('card-panel', 'row');
+  div.id = id;
+
+  div.innerHTML = `
+    <div class="col s10">
+      <h6>${platillo.nombre}</h6>
+      <p>${platillo.ingredientes}</p>
+      <p>$${platillo.precio}</p>
+    </div>
+
+    <div class="col s2 right-align">
+      <button class="btn red delete-btn" data-id="${id}">
+        <i class="material-icons">delete</i>
+      </button>
+    </div>
+  `;
+
+  contenedor.appendChild(div);
+
+  activarEliminar();
+}
+
+function activarEliminar() {
+
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+
+    btn.onclick = () => {
+
+      const id = btn.getAttribute('data-id');
+
+      db.collection("platillos").doc(id).delete();
+
+    };
+
+  });
+
 }
