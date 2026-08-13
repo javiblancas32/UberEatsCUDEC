@@ -2,162 +2,191 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pedidos</title>
+  <meta charset="UTF-8">
 
-    <!-- Materialize -->
-    <link rel="stylesheet" href="/css/materialize.min.css">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <!-- Iconos Material -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Pedidos - La Parada de Javi</title>
 
-    <!-- Leaflet -->
-    <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- PWA -->
+  <meta name="theme-color"
+        content="#FF8816">
 
-    <style>
-        body {
-            padding-bottom: 50px;
-        }
+  <link rel="manifest"
+        href="./manifest.json">
 
-        .container {
-            margin-top: 40px;
-        }
+  <!-- Materialize -->
+  <link rel="stylesheet"
+        href="./css/materialize.min.css">
 
-        #btnUbicacion {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
 
-        #mapa {
-            width: 100%;
-            height: 350px;
-            margin-top: 20px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-    </style>
+  <!-- Leaflet -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet"
+        href="./css/styles.css">
 
 </head>
 
 <body class="grey lighten-4">
 
-    <nav class="blue">
-        <div class="nav-wrapper container">
+  <nav class="z-depth-0">
 
-            <a href="/" class="brand-logo">
-                La Parada de Javi
-            </a>
+    <div class="nav-wrapper container">
 
-            <a href="/" class="right btn white blue-text">
-                <i class="material-icons left"></i>
-                Regresar
-            </a>
+      <a href="./">
+        La Parada <span>de Javi</span>
+      </a>
 
-        </div>
-    </nav>
+      <a href="./"
+         class="right btn white orange-text">
 
-    <div class="container">
+        <i class="material-icons left">
+          arrow_back
+        </i>
 
-        <h4 class="center">
-            Nuevo Pedido
-        </h4>
+        Regresar
 
-        <form id="formPedido">
-
-            <!-- Nombre -->
-            <div class="input-field">
-                <input
-                    type="text"
-                    id="nombre"
-                    required>
-
-                <label for="nombre">
-                    Nombre del cliente
-                </label>
-            </div>
-
-            <!-- Dirección -->
-            <div class="input-field">
-                <input
-                    type="text"
-                    id="direccion"
-                    required>
-
-                <label for="direccion">
-                    Dirección
-                </label>
-            </div>
-
-            <!-- Platillo -->
-            <div class="input-field">
-
-                <select id="platillo" required>
-
-                    <option value="" disabled selected>
-                        Seleccione un platillo
-                    </option>
-
-                </select>
-
-                <label>Platillo</label>
-
-            </div>
-
-            <!-- Coordenadas ocultas -->
-            <input type="hidden" id="latitud">
-            <input type="hidden" id="longitud">
-
-            <!-- Botón ubicación -->
-            <button
-                type="button"
-                id="btnUbicacion"
-                class="btn blue">
-
-                <i class="material-icons left"></i>
-
-                Obtener ubicación
-
-            </button>
-
-            <!-- MAPA -->
-            <div id="mapa"></div>
-
-            <br>
-
-            <!-- Guardar -->
-            <button
-                type="submit"
-                class="btn green">
-
-                <i class="material-icons left"></i>
-
-                Guardar Pedido
-
-            </button>
-
-        </form>
+      </a>
 
     </div>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+  </nav>
 
-    <!-- Firebase -->
-    <script src="/js/firebase.js"></script>
-    <script src="/js/db.js"></script>
+  <div class="container">
 
-    <!-- Leaflet -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <h4 class="center">
+      Nuevo Pedido
+    </h4>
 
-    <!-- Materialize -->
-    <script src="/js/materialize.min.js"></script>
+    <form id="formPedido">
 
-    <!-- Tu código -->
-    <script src="/js/pedidos.js"></script>
+      <!-- NOMBRE -->
+      <div class="input-field">
+
+        <input type="text"
+               id="nombre"
+               required>
+
+        <label for="nombre">
+          Nombre del cliente
+        </label>
+
+      </div>
+
+      <!-- DIRECCIÓN -->
+      <div class="input-field">
+
+        <input type="text"
+               id="direccion"
+               required>
+
+        <label for="direccion">
+          Dirección
+        </label>
+
+      </div>
+
+      <!-- PLATILLO -->
+      <div class="input-field">
+
+        <select id="platillo"
+                required>
+
+          <option value=""
+                  disabled
+                  selected>
+
+            Seleccione un platillo
+
+          </option>
+
+        </select>
+
+        <label>
+          Platillo
+        </label>
+
+      </div>
+
+      <!-- COORDENADAS -->
+      <input type="hidden"
+             id="latitud">
+
+      <input type="hidden"
+             id="longitud">
+
+      <!-- UBICACIÓN -->
+      <button type="button"
+              id="btnUbicacion"
+              class="btn blue">
+
+        <i class="material-icons left">
+          location_on
+        </i>
+
+        Obtener ubicación
+
+      </button>
+
+      <!-- MAPA -->
+      <div id="mapa"></div>
+
+      <br>
+
+      <!-- GUARDAR -->
+      <button type="submit"
+              class="btn green">
+
+        <i class="material-icons left">
+          save
+        </i>
+
+        Guardar Pedido
+
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+
+  <script src="./js/firebase.js"></script>
+
+  <!-- LEAFLET -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- MATERIALIZE -->
+  <script src="./js/materialize.min.js"></script>
+
+  <!-- PEDIDOS -->
+  <script src="./js/pedidos.js"></script>
+
+  <!-- SERVICE WORKER -->
+  <script>
+
+    if ("serviceWorker" in navigator) {
+
+      window.addEventListener("load", function () {
+
+        navigator.serviceWorker.register("./sw.js");
+
+      });
+
+    }
+
+  </script>
 
 </body>
 

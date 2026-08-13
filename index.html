@@ -1,58 +1,301 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Ninja</title>
 
-  <link rel="stylesheet" href="/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>La Parada de Javi</title>
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#FF8816">
+
+  <link rel="manifest"
+        href="./manifest.json">
+
+  <link rel="apple-touch-icon"
+        href="./images/icon-192.png">
+
+  <!-- Materialize -->
+  <link rel="stylesheet"
+        href="./css/materialize.min.css">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet"
+        href="./css/styles.css">
 </head>
 
 <body class="grey lighten-4">
 
-<nav class="z-depth-0">
-  <div class="nav-wrapper container">
-    <a href="/">La parada<span>de Javi</span></a>
-    <i class="material-icons sidenav-trigger right" data-target="side-menu">menu</i>
+  <!-- NAV -->
+  <nav class="z-depth-0">
+
+    <div class="nav-wrapper container">
+
+      <a href="./">
+        La Parada <span>de Javi</span>
+      </a>
+
+      <span class="right grey-text text-darken-1">
+
+        <i class="material-icons sidenav-trigger"
+           data-target="side-menu">
+          menu
+        </i>
+
+      </span>
+
+    </div>
+
+  </nav>
+
+  <!-- MENÚ LATERAL -->
+  <ul id="side-menu"
+      class="sidenav side-menu">
+
+    <li>
+      <a class="subheader">
+        LA PARADA DE JAVI
+      </a>
+    </li>
+
+    <li>
+      <a href="./"
+         class="waves-effect">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="./pedidos.html"
+         class="waves-effect">
+        Pedidos
+      </a>
+    </li>
+
+    <li>
+      <a href="./pages/about.html"
+         class="waves-effect">
+        About
+      </a>
+    </li>
+
+    <li>
+      <div class="divider"></div>
+    </li>
+
+    <li>
+
+      <a href="./pages/contact.html"
+         class="waves-effect">
+
+        <i class="material-icons">
+          mail_outline
+        </i>
+
+        Contacto
+
+      </a>
+
+    </li>
+
+  </ul>
+
+  <!-- CONTENIDO -->
+  <div class="container">
+
+    <h4 class="center">
+      Platillos
+    </h4>
+
+    <!-- FORMULARIO DE PLATILLOS -->
+    <form id="formPlatillo"
+          class="side-form">
+
+      <div class="input-field">
+
+        <input id="title"
+               name="title"
+               type="text"
+               required>
+
+        <label for="title">
+          Nombre
+        </label>
+
+      </div>
+
+      <div class="input-field">
+
+        <input id="ingredients"
+               name="ingredients"
+               type="text"
+               required>
+
+        <label for="ingredients">
+          Ingredientes
+        </label>
+
+      </div>
+
+      <div class="input-field">
+
+        <input id="price"
+               name="price"
+               type="number"
+               min="0"
+               step="0.01"
+               required>
+
+        <label for="price">
+          Precio
+        </label>
+
+      </div>
+
+      <!-- FOTO -->
+      <input type="hidden"
+             id="fotoPlatillo"
+             name="fotoPlatillo">
+
+      <button id="btnAgregarPlatillo"
+              type="submit"
+              class="btn add-btn">
+
+        <i class="material-icons left">
+          add
+        </i>
+
+        Agregar
+
+      </button>
+
+    </form>
+
+    <br>
+
+    <!-- CÁMARA -->
+    <div class="camera-section">
+
+      <button id="btnFoto"
+              type="button"
+              class="btn orange">
+
+        <i class="material-icons left">
+          photo_camera
+        </i>
+
+        Abrir cámara
+
+      </button>
+
+      <button id="btnTomarFoto"
+              type="button"
+              class="btn green">
+
+        <i class="material-icons left">
+          camera
+        </i>
+
+        Tomar foto
+
+      </button>
+
+      <button id="btnCerrarCamara"
+              type="button"
+              class="btn red">
+
+        <i class="material-icons left">
+          close
+        </i>
+
+        Cerrar cámara
+
+      </button>
+
+      <div id="camara">
+
+        <video id="video"
+               autoplay
+               playsinline>
+
+          No hay video disponible
+
+        </video>
+
+      </div>
+
+      <canvas id="canvas"></canvas>
+
+      <div id="salida">
+
+        <img id="foto"
+             src=""
+             alt="Foto del platillo">
+
+      </div>
+
+    </div>
+
+    <!-- PLATILLOS -->
+    <div class="recipes"></div>
+
   </div>
-</nav>
 
-<ul id="side-menu" class="sidenav side-menu">
-  <li><a href="/">Home</a></li>
-  <li><a href="/pedidos.html">Pedidos</a></li>
-  <li><a href="/contact.html">Contact</a></li>
-</ul>
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
 
-<div class="container">
+  <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
 
-  <form class="side-form">
-    <input name="title" placeholder="Nombre">
-    <input name="ingredients" placeholder="Ingredientes">
-    <input name="price" placeholder="Precio">
-    <button id="btnAgregarPlatillo" class="btn">Agregar</button>
+  <script src="./js/firebase.js"></script>
 
-  </form>
-  <button id="btnFoto">Imagen</button>
-  <div id="camara">
-    <video id="video">No hay video disponible</video>
+  <!-- MATERIALIZE -->
+  <script src="./js/materialize.min.js"></script>
 
-  </div>
-  <canvas id="canvas"> </canvas>
-  <div id="salida"><img id="foto" src="" alt="Foto del platillo"></div>
+  <!-- PROYECTO -->
+  <script src="./js/index.js"></script>
+  <script src="./js/db.js"></script>
 
-  <div class="recipes"></div>
+  <!-- SERVICE WORKER -->
+  <script>
 
-</div>
+    if ("serviceWorker" in navigator) {
 
-<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+      window.addEventListener("load", function () {
 
-<script src="/js/firebase.js"></script>
-<script src="/js/db.js"></script>
-<script src="/js/index.js"></script>
+        navigator.serviceWorker
+          .register("./sw.js")
 
-<script src="/js/materialize.min.js"></script>
+          .then(function (registro) {
+
+            console.log(
+              "Service Worker registrado:",
+              registro.scope
+            );
+
+          })
+
+          .catch(function (error) {
+
+            console.error(
+              "Error Service Worker:",
+              error
+            );
+
+          });
+
+      });
+
+    }
+
+  </script>
+
 </body>
+
 </html>
