@@ -9,31 +9,30 @@
 
   <title>La Parada de Javi</title>
 
-  <!-- PWA -->
   <meta name="theme-color" content="#FF8816">
 
-  <link rel="manifest"
-        href="./manifest.json">
+  <link rel="manifest" href="./manifest.json">
 
   <link rel="apple-touch-icon"
         href="./images/icon-192.png">
 
-  <!-- Materialize -->
   <link rel="stylesheet"
         href="./css/materialize.min.css">
 
-  <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
 
-  <!-- CSS -->
   <link rel="stylesheet"
         href="./css/styles.css">
 </head>
 
 <body class="grey lighten-4">
 
-  <!-- NAV -->
+
+  <!-- =========================
+       NAVEGACIÓN
+  ========================== -->
+
   <nav class="z-depth-0">
 
     <div class="nav-wrapper container">
@@ -55,7 +54,11 @@
 
   </nav>
 
-  <!-- MENÚ LATERAL -->
+
+  <!-- =========================
+       MENÚ LATERAL
+  ========================== -->
+
   <ul id="side-menu"
       class="sidenav side-menu">
 
@@ -66,24 +69,48 @@
     </li>
 
     <li>
+
       <a href="./"
          class="waves-effect">
+
+        <i class="material-icons">
+          home
+        </i>
+
         Home
+
       </a>
+
     </li>
 
     <li>
+
       <a href="./pedidos.html"
          class="waves-effect">
+
+        <i class="material-icons">
+          shopping_cart
+        </i>
+
         Pedidos
+
       </a>
+
     </li>
 
     <li>
+
       <a href="./pages/about.html"
          class="waves-effect">
+
+        <i class="material-icons">
+          info_outline
+        </i>
+
         About
+
       </a>
+
     </li>
 
     <li>
@@ -107,14 +134,20 @@
 
   </ul>
 
-  <!-- CONTENIDO -->
+
+  <!-- =========================
+       CONTENIDO
+  ========================== -->
+
   <div class="container">
 
     <h4 class="center">
       Platillos
     </h4>
 
-    <!-- FORMULARIO DE PLATILLOS -->
+
+    <!-- FORMULARIO -->
+
     <form id="formPlatillo"
           class="side-form">
 
@@ -131,6 +164,7 @@
 
       </div>
 
+
       <div class="input-field">
 
         <input id="ingredients"
@@ -143,6 +177,7 @@
         </label>
 
       </div>
+
 
       <div class="input-field">
 
@@ -159,10 +194,13 @@
 
       </div>
 
+
       <!-- FOTO -->
+
       <input type="hidden"
              id="fotoPlatillo"
              name="fotoPlatillo">
+
 
       <button id="btnAgregarPlatillo"
               type="submit"
@@ -178,9 +216,14 @@
 
     </form>
 
+
     <br>
 
-    <!-- CÁMARA -->
+
+    <!-- =========================
+         CÁMARA
+    ========================== -->
+
     <div class="camera-section">
 
       <button id="btnFoto"
@@ -195,6 +238,7 @@
 
       </button>
 
+
       <button id="btnTomarFoto"
               type="button"
               class="btn green">
@@ -206,6 +250,7 @@
         Tomar foto
 
       </button>
+
 
       <button id="btnCerrarCamara"
               type="button"
@@ -219,6 +264,7 @@
 
       </button>
 
+
       <div id="camara">
 
         <video id="video"
@@ -231,7 +277,9 @@
 
       </div>
 
+
       <canvas id="canvas"></canvas>
+
 
       <div id="salida">
 
@@ -243,58 +291,60 @@
 
     </div>
 
+
     <!-- PLATILLOS -->
+
     <div class="recipes"></div>
 
   </div>
 
+
   <!-- FIREBASE -->
+
   <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
 
   <script src="./js/firebase.js"></script>
 
+
   <!-- MATERIALIZE -->
+
   <script src="./js/materialize.min.js"></script>
 
+
+  <!-- MENÚ -->
+
+  <script src="./js/menu.js"></script>
+
+
   <!-- PROYECTO -->
+
   <script src="./js/index.js"></script>
+
   <script src="./js/db.js"></script>
 
+
   <!-- SERVICE WORKER -->
+
   <script>
 
     if ("serviceWorker" in navigator) {
 
-      window.addEventListener("load", function () {
+      window.addEventListener(
+        "load",
+        function () {
 
-        navigator.serviceWorker
-          .register("./sw.js")
+          navigator.serviceWorker
+            .register("./sw.js");
 
-          .then(function (registro) {
-
-            console.log(
-              "Service Worker registrado:",
-              registro.scope
-            );
-
-          })
-
-          .catch(function (error) {
-
-            console.error(
-              "Error Service Worker:",
-              error
-            );
-
-          });
-
-      });
+        }
+      );
 
     }
 
   </script>
+
 
 </body>
 

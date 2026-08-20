@@ -1,5 +1,5 @@
 const CACHE_NAME =
-  "la-parada-javi-v3";
+  "la-parada-javi-v4";
 
 const BASE =
   self.registration.scope;
@@ -73,6 +73,11 @@ const APP_SHELL = [
 
   new URL(
     "manifest.json",
+    BASE
+  ).href,
+
+  new URL(
+    "images/logo.png",
     BASE
   ).href,
 

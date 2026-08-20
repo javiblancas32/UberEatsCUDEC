@@ -4,6 +4,7 @@
   --title: #FF8816;
 }
 
+
 /* ==========================================
    GENERAL
 ========================================== */
@@ -222,6 +223,54 @@ input {
 
 
 /* ==========================================
+   ACERCA DE
+========================================== */
+
+.about-card {
+  border-radius: 12px;
+}
+
+.about-logo {
+  display: block;
+
+  width: 200px;
+  max-width: 100%;
+
+  height: auto;
+
+  margin: 20px auto;
+
+  border-radius: 20px;
+}
+
+.about-title {
+  color: var(--title);
+
+  font-weight: bold;
+
+  margin-top: 10px;
+}
+
+.about-version {
+  color: #777;
+
+  font-size: 15px;
+
+  margin-top: 5px;
+}
+
+.about-section-title {
+  color: var(--title);
+
+  font-weight: 500;
+}
+
+.about-card p {
+  line-height: 1.7;
+}
+
+
+/* ==========================================
    MÓVIL
 ========================================== */
 
@@ -244,6 +293,18 @@ input {
   #mapa {
 
     height: 300px;
+
+  }
+
+  .about-logo {
+
+    width: 160px;
+
+  }
+
+  nav .brand-logo {
+
+    font-size: 18px;
 
   }
 

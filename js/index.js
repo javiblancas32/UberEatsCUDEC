@@ -15,6 +15,7 @@ document.addEventListener(
       menus
     );
 
+
     // =========================================
     // CÁMARA
     // =========================================
@@ -61,6 +62,38 @@ document.addEventListener(
         "btnCerrarCamara"
       );
 
+    const camara =
+      document.getElementById(
+        "camara"
+      );
+
+    const salida =
+      document.getElementById(
+        "salida"
+      );
+
+
+    // =========================================
+    // ESTADO INICIAL
+    // =========================================
+
+    if (camara) {
+      camara.style.display = "none";
+    }
+
+    if (btnTomarFoto) {
+      btnTomarFoto.style.display = "none";
+    }
+
+    if (btnCerrarCamara) {
+      btnCerrarCamara.style.display = "none";
+    }
+
+    if (salida) {
+      salida.style.display = "none";
+    }
+
+
     // =========================================
     // ABRIR CÁMARA
     // =========================================
@@ -81,8 +114,32 @@ document.addEventListener(
             );
 
             return;
-
           }
+
+
+          // Ocultar foto anterior
+          if (salida) {
+            salida.style.display = "none";
+          }
+
+
+          // Mostrar cámara
+          if (camara) {
+            camara.style.display = "block";
+          }
+
+
+          // Mostrar botones de cámara
+          if (btnTomarFoto) {
+            btnTomarFoto.style.display =
+              "inline-block";
+          }
+
+          if (btnCerrarCamara) {
+            btnCerrarCamara.style.display =
+              "inline-block";
+          }
+
 
           navigator.mediaDevices
             .getUserMedia({
@@ -134,6 +191,7 @@ document.addEventListener(
 
     }
 
+
     // =========================================
     // AJUSTAR VIDEO
     // =========================================
@@ -181,6 +239,7 @@ document.addEventListener(
 
     }
 
+
     // =========================================
     // TOMAR FOTO
     // =========================================
@@ -194,6 +253,7 @@ document.addEventListener(
 
     }
 
+
     function tomarFoto() {
 
       if (!streamActual) {
@@ -203,19 +263,21 @@ document.addEventListener(
         );
 
         return;
-
       }
+
 
       const contexto =
         canvas.getContext(
           "2d"
         );
 
+
       canvas.width =
         width;
 
       canvas.height =
         height;
+
 
       contexto.drawImage(
         video,
@@ -225,19 +287,42 @@ document.addEventListener(
         height
       );
 
+
       const fotoFinal =
         canvas.toDataURL(
           "image/jpeg",
           0.7
         );
 
+
+      // Guardar foto
       foto.src =
         fotoFinal;
 
       fotoPlatillo.value =
         fotoFinal;
 
+
+      // =====================================
+      // CERRAR CÁMARA AUTOMÁTICAMENTE
+      // =====================================
+
+      cerrarCamara();
+
+
+      // =====================================
+      // MOSTRAR FOTO TOMADA
+      // =====================================
+
+      if (salida) {
+
+        salida.style.display =
+          "block";
+
+      }
+
     }
+
 
     // =========================================
     // CERRAR CÁMARA
@@ -253,8 +338,10 @@ document.addEventListener(
 
     }
 
+
     function cerrarCamara() {
 
+      // Detener físicamente la cámara
       if (streamActual) {
 
         streamActual
@@ -272,11 +359,42 @@ document.addEventListener(
 
       }
 
-      video.srcObject =
-        null;
+
+      if (video) {
+
+        video.srcObject =
+          null;
+
+      }
+
 
       streaming =
         false;
+
+
+      // Ocultar video
+      if (camara) {
+
+        camara.style.display =
+          "none";
+
+      }
+
+
+      // Ocultar botones
+      if (btnTomarFoto) {
+
+        btnTomarFoto.style.display =
+          "none";
+
+      }
+
+      if (btnCerrarCamara) {
+
+        btnCerrarCamara.style.display =
+          "none";
+
+      }
 
     }
 
@@ -303,20 +421,25 @@ function mostrarPlatillos(
     return;
   }
 
+
   const div =
     document.createElement(
       "div"
     );
+
 
   div.classList.add(
     "card-panel",
     "recipe"
   );
 
+
   div.id =
     id;
 
+
   let imagen = "";
+
 
   if (
     platillo.foto &&
@@ -343,6 +466,7 @@ function mostrarPlatillos(
     `;
 
   }
+
 
   div.innerHTML = `
 
@@ -385,9 +509,11 @@ function mostrarPlatillos(
 
   `;
 
+
   contenedor.appendChild(
     div
   );
+
 
   activarEliminar();
 
@@ -415,6 +541,7 @@ function activarEliminar() {
               btn.getAttribute(
                 "data-id"
               );
+
 
             if (
               confirm(
